@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
     # create model
     deepcnn = DEEPCNN(in_channels=data.shape[1], kernel_size=3,
-                      in_dim=data.shape[-1], out_dim=10, hidden_dim=20, n_hidden=3, dropout=0.5)
+                      in_dim=data.shape[-1], out_dim=10, hidden_dim=100, n_hidden=3, dropout=0.5)
     optimizer = optim.Adam(deepcnn.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
     if USE_CUDA:

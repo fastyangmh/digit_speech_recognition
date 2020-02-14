@@ -23,7 +23,7 @@ class DEEPCNN(nn.Module):
         self.layers = nn.ModuleList([nn.Linear(in_size, out_size) for (
             in_size, out_size) in zip(in_sizes, out_sizes)])
         self.last_layer = nn.Linear(hidden_dim, out_dim)
-        self.leakyrelu = nn.LeakyReLU(inplace=True)
+        self.relu = nn.ReLU(inplace=True)
         self.softmax = nn.Softmax(dim=1)
         self.dropout = nn.Dropout(dropout)
 
@@ -31,7 +31,7 @@ class DEEPCNN(nn.Module):
         x = self.pool(self.conv(x))
         x = x.squeeze(1)
         for layer in self.layers:
-            x = self.leakyrelu(self.dropout(layer(x)))
+            x = self.relu(self.dropout(layer(x)))
         x = self.softmax(self.last_layer(x))
         return x
 
